@@ -3,7 +3,7 @@
   <img src="https://github.com/user-attachments/assets/5b2ab201-5926-46fa-b0a2-07a6f406ab6d" alt="Banner" />
 </p>
 <h1 align="center">
-    Terraform Azure Module Template
+    Terraform Azure Functions App
 </h1>
 
 <p align="center" style="font-size: 1.2rem;">
@@ -26,16 +26,16 @@
 </p>
 <p align="center">
 
-<a href='https://facebook.com/sharer/sharer.php?u=https://github.com/clouddrove/terraform-module-template'>
+<a href='https://facebook.com/sharer/sharer.php?u=https://github.com/terraform-az-modules/terraform-azurerm-functions-app.git'> 
   <img title="Share on Facebook" src="https://user-images.githubusercontent.com/50652676/62817743-4f64cb80-bb59-11e9-90c7-b057252ded50.png" />
 </a>
 <a href='https://www.instagram.com/cloud_drove?igsh=cHJqaDY3bGtnYmh3' title="Follow On Instagram">
   <img src="https://github.com/gauravghongde/social-icons/blob/master/SVG/Color/Instagram.svg" width="23" height="23" />
 </a>
-<a href='https://www.linkedin.com/shareArticle?mini=true&title=Terraform+Module+Template&url=https://github.com/clouddrove/terraform-module-template'>
+<a href='https://www.linkedin.com/shareArticle?mini=true&title=Terraform+Module+Template&url=https://github.com/terraform-az-modules/terraform-azurerm-functions-app.git'>
   <img title="Share on LinkedIn" src="https://user-images.githubusercontent.com/50652676/62817742-4e339e80-bb59-11e9-87b9-a1f68cae1049.png" />
 </a>
-<a href='https://twitter.com/intent/tweet/?text=Terraform+Module+Template&url=https://github.com/clouddrove/terraform-module-template'>
+<a href='https://twitter.com/intent/tweet/?text=Terraform+Module+Template&url=https://github.com/terraform-az-modules/terraform-azurerm-functions-app.git'>
   <img title="Share on Twitter" src="https://user-images.githubusercontent.com/50652676/62817740-4c69db00-bb59-11e9-8a79-3580fbbf6d5c.png" />
 </a>
 
@@ -57,7 +57,7 @@ This table contains both Prerequisites and Providers:
 | Description   | Name                                       | Version   |
 |:-------------:|:-------------------------------------------:|:---------:|
 | **Prerequisite** | [Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) | >= 1.6.6 |
-| **Provider** | [azure](https://azure.microsoft.com/) | >= 3.90.0 |
+| **Provider** | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=3.116.0 |
 
 
 
@@ -73,18 +73,96 @@ This table contains both Prerequisites and Providers:
 
 ## Inputs and Outputs
 
-### Inputs
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_linux_function_app.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_function_app) | resource |
+| [azurerm_private_endpoint.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
+| [azurerm_role_assignment.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
+| [azurerm_service_plan.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan) | resource |
+| [azurerm_windows_function_app.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_function_app) | resource |
+
+## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| label_order | Label order, e.g. `name`,`application`,`centralus`. | `list(any)` | <pre>["name","environment",  "location"]</pre> | no |
+| <a name="input_additional_tags"></a> [additional\_tags](#input\_additional\_tags) | Additional tags for the resource. | `map(string)` | `null` | no |
+| <a name="input_always_on"></a> [always\_on](#input\_always\_on) | To enable always on for function | `bool` | `false` | no |
+| <a name="input_app_scale_limit"></a> [app\_scale\_limit](#input\_app\_scale\_limit) | The number of instanstes this Function App can scale to. Only supported for Consumption (e.g. "Y1") and Elastic Premium (e.g. "EP1") plans. | `number` | `1` | no |
+| <a name="input_app_service_environment_id"></a> [app\_service\_environment\_id](#input\_app\_service\_environment\_id) | The ID of the App Service Environment to create this Service Plan in. Requires an Isolated SKU. Use one of I1, I2, I3 for azurerm\_app\_service\_environment, or I1v2, I2v2, I3v2 for azurerm\_app\_service\_environment\_v3 | `string` | `null` | no |
+| <a name="input_app_service_plan_id"></a> [app\_service\_plan\_id](#input\_app\_service\_plan\_id) | The ID of the App Service plan to host this Function App on. | `string` | `null` | no |
+| <a name="input_app_settings"></a> [app\_settings](#input\_app\_settings) | A map of app settings to be configured for this Function App. | `map(string)` | `{}` | no |
+| <a name="input_application_stack_dotnet_version"></a> [application\_stack\_dotnet\_version](#input\_application\_stack\_dotnet\_version) | The version of .NET to use for this Function App. | `string` | `null` | no |
+| <a name="input_application_stack_java_version"></a> [application\_stack\_java\_version](#input\_application\_stack\_java\_version) | The version of Java to use for this Function App. | `string` | `null` | no |
+| <a name="input_application_stack_node_version"></a> [application\_stack\_node\_version](#input\_application\_stack\_node\_version) | The version of Node.js to use for this Function App. | `string` | `null` | no |
+| <a name="input_application_stack_powershell_core_version"></a> [application\_stack\_powershell\_core\_version](#input\_application\_stack\_powershell\_core\_version) | The version of PowerShell Core to use for this Function App. | `string` | `null` | no |
+| <a name="input_application_stack_python_version"></a> [application\_stack\_python\_version](#input\_application\_stack\_python\_version) | The version of Python to use for this Function App. | `string` | `null` | no |
+| <a name="input_application_stack_use_dotnet_isolated_runtime"></a> [application\_stack\_use\_dotnet\_isolated\_runtime](#input\_application\_stack\_use\_dotnet\_isolated\_runtime) | Should the .NET process for this Function App use an isolated runtime? | `bool` | `false` | no |
+| <a name="input_builtin_logging_enabled"></a> [builtin\_logging\_enabled](#input\_builtin\_logging\_enabled) | Configures `AzureWebJobsDashboard` app setting based on the configured storage setting | `bool` | `true` | no |
+| <a name="input_costcenter"></a> [costcenter](#input\_costcenter) | Cost allocation of the resource (e.g. `IT12345`). | `string` | `""` | no |
+| <a name="input_custom_name"></a> [custom\_name](#input\_custom\_name) | Define your custom name to override default naming convention | `string` | `null` | no |
+| <a name="input_deployment_mode"></a> [deployment\_mode](#input\_deployment\_mode) | Specifies how the infrastructure/resource is deployed | `string` | `"terraform"` | no |
+| <a name="input_elastic_instance_minimum"></a> [elastic\_instance\_minimum](#input\_elastic\_instance\_minimum) | The minimum number of instances for this Function App. Only supported for Elastic Premium (e.g. "EP1") plans. | `number` | `1` | no |
+| <a name="input_enable_asp"></a> [enable\_asp](#input\_enable\_asp) | n/a | `bool` | `true` | no |
+| <a name="input_enable_private_endpoint"></a> [enable\_private\_endpoint](#input\_enable\_private\_endpoint) | Boolean to enable private endpoint for Function App | `bool` | `false` | no |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `""` | no |
+| <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Variable to pass extra tags. | `map(string)` | `null` | no |
+| <a name="input_func_connection_string"></a> [func\_connection\_string](#input\_func\_connection\_string) | Application Insights connection string for Function App | `string` | `null` | no |
+| <a name="input_func_instrumentation_key"></a> [func\_instrumentation\_key](#input\_func\_instrumentation\_key) | Application Insights instrumentation key for Function App | `string` | `null` | no |
+| <a name="input_functions_extension_version"></a> [functions\_extension\_version](#input\_functions\_extension\_version) | Which extension version to use for this Function App. | `string` | `"~4"` | no |
+| <a name="input_https_only"></a> [https\_only](#input\_https\_only) | To enable https only | `bool` | `true` | no |
+| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | A list of IDs of managed identities to be assigned to this Function App. | `list(string)` | `[]` | no |
+| <a name="input_ip_restriction_default_action"></a> [ip\_restriction\_default\_action](#input\_ip\_restriction\_default\_action) | The default action for traffic that does not match any IP restriction rule. Value must be "Allow" or "Deny". | `string` | `"Deny"` | no |
+| <a name="input_ip_restrictions"></a> [ip\_restrictions](#input\_ip\_restrictions) | A list of IP restrictions to be configured for this Function App. | <pre>list(object({<br>    action                    = optional(string, "Allow")<br>    ip_address                = optional(string)<br>    name                      = string<br>    priority                  = number<br>    service_tag               = optional(string)<br>    virtual_network_subnet_id = optional(string)<br><br>    headers = optional(object({<br>      x_forwarded_for   = optional(list(string))<br>      x_forwarded_host  = optional(list(string))<br>      x_azure_fdid      = optional(list(string))<br>      x_fd_health_probe = optional(list(string))<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_key_vault_reference_identity_id"></a> [key\_vault\_reference\_identity\_id](#input\_key\_vault\_reference\_identity\_id) | The ID of the managed identity that will be used to fetch app settings sourced from Key Vault. | `string` | `null` | no |
+| <a name="input_kind"></a> [kind](#input\_kind) | The kind of Function App to create. Allowed values are "Linux" and "Windows". | `string` | `"Linux"` | no |
+| <a name="input_label_order"></a> [label\_order](#input\_label\_order) | The order of labels used to construct resource names or tags. If not specified, defaults to ['name', 'environment', 'location']. | `list(any)` | <pre>[<br>  "name",<br>  "environment",<br>  "location"<br>]</pre> | no |
+| <a name="input_linux_sku_name"></a> [linux\_sku\_name](#input\_linux\_sku\_name) | SKU name for Linux service plans | `string` | `null` | no |
+| <a name="input_linux_worker_count"></a> [linux\_worker\_count](#input\_linux\_worker\_count) | Number of linux worker count | `number` | `1` | no |
+| <a name="input_location"></a> [location](#input\_location) | The location/region where the virtual network is created. Changing this forces a new resource to be created. | `string` | `""` | no |
+| <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id) | The ID of the Log Analytics workspace to send diagnostic to. | `string` | `null` | no |
+| <a name="input_managedby"></a> [managedby](#input\_managedby) | ManagedBy, eg 'terraform-az-modules'. | `string` | `"terraform-az-modules"` | no |
+| <a name="input_maximum_elastic_worker_count"></a> [maximum\_elastic\_worker\_count](#input\_maximum\_elastic\_worker\_count) | The maximum number of workers to use in an Elastic SKU Plan. Cannot be set unless using an Elastic SKU. | `number` | `null` | no |
+| <a name="input_minimum_tls_version"></a> [minimum\_tls\_version](#input\_minimum\_tls\_version) | Minimum version of TLS required for SSL requests | `number` | `1.2` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name  (e.g. `app` or `cluster`). | `string` | `""` | no |
+| <a name="input_os_type"></a> [os\_type](#input\_os\_type) | The O/S type for the App Services to be hosted in this plan. Possible values include `Windows`, `Linux`, and `WindowsContainer`. | `string` | `"Linux"` | no |
+| <a name="input_owner"></a> [owner](#input\_owner) | Team or person responsible for the resource (e.g. `TBC`). | `string` | `""` | no |
+| <a name="input_per_site_scaling_enabled"></a> [per\_site\_scaling\_enabled](#input\_per\_site\_scaling\_enabled) | Should Per Site Scaling be enabled. | `bool` | `false` | no |
+| <a name="input_pre_warmed_instance_count"></a> [pre\_warmed\_instance\_count](#input\_pre\_warmed\_instance\_count) | The number of pre-warmed instances for this Function App. Only supported for Elastic Premium (e.g. "EP1") plans. | `number` | `1` | no |
+| <a name="input_private_dns_zone_ids"></a> [private\_dns\_zone\_ids](#input\_private\_dns\_zone\_ids) | Id of the private DNS Zone | `string` | `""` | no |
+| <a name="input_private_endpoint_subnet_id"></a> [private\_endpoint\_subnet\_id](#input\_private\_endpoint\_subnet\_id) | Subnet ID for private endpoint | `string` | `""` | no |
+| <a name="input_projectdomain"></a> [projectdomain](#input\_projectdomain) | High-level project domain (e.g. `Membership`). | `string` | `""` | no |
+| <a name="input_projectsubdomain"></a> [projectsubdomain](#input\_projectsubdomain) | Specific subdomain of the project | `string` | `""` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | To enable public network access for function app | `bool` | `true` | no |
+| <a name="input_repository"></a> [repository](#input\_repository) | Terraform current module repo | `string` | `"https://github.com/terraform-az-modules/terraform-azure-nsg"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to create the resources in. | `string` | `null` | no |
+| <a name="input_resource_position_prefix"></a> [resource\_position\_prefix](#input\_resource\_position\_prefix) | Controls the placement of the resource type keyword (e.g., "rg", "rg-lock") in the resource name.<br><br>- If true, the keyword is prepended: "rg-core-dev".<br>- If false, the keyword is appended: "core-dev-rg".<br><br>This helps maintain naming consistency based on organizational preferences. | `bool` | `true` | no |
+| <a name="input_resourcegroup"></a> [resourcegroup](#input\_resourcegroup) | Associated resource group name (e.g. `app-rg`). | `string` | `""` | no |
+| <a name="input_scm_ip_restriction_default_action"></a> [scm\_ip\_restriction\_default\_action](#input\_scm\_ip\_restriction\_default\_action) | The default action for traffic to the Source Control Manager (SCM) that does not match any IP restriction rule. Value must be "Allow" or "Deny". | `string` | `"Deny"` | no |
+| <a name="input_site_config"></a> [site\_config](#input\_site\_config) | In the resource: | `any` | n/a | yes |
+| <a name="input_storage_account_access_key"></a> [storage\_account\_access\_key](#input\_storage\_account\_access\_key) | Storage account access key to access backend storage conflicts with storage\_uses\_managed\_identity | `string` | `null` | no |
+| <a name="input_storage_account_id"></a> [storage\_account\_id](#input\_storage\_account\_id) | The ID of the Storage account to connect to this Function App. | `string` | `null` | no |
+| <a name="input_storage_uses_managed_identity"></a> [storage\_uses\_managed\_identity](#input\_storage\_uses\_managed\_identity) | Should the Function App use Managed Identity to access the storage account. Conflicts with storage\_account\_access\_key | `bool` | `false` | no |
+| <a name="input_taggedby"></a> [taggedby](#input\_taggedby) | Tool or process responsible for creating the resource (e.g. `terraform`). | `string` | `""` | no |
+| <a name="input_use_32_bit_worker"></a> [use\_32\_bit\_worker](#input\_use\_32\_bit\_worker) | Should this Function App use a 32-bit worker process? | `bool` | `true` | no |
+| <a name="input_virtual_network_id"></a> [virtual\_network\_id](#input\_virtual\_network\_id) | The name of the virtual network | `string` | `""` | no |
+| <a name="input_virtual_network_subnet_id"></a> [virtual\_network\_subnet\_id](#input\_virtual\_network\_subnet\_id) | The ID of a virtual network subnet to integrate this Function App with. | `string` | `null` | no |
+| <a name="input_vnet_route_all_enabled"></a> [vnet\_route\_all\_enabled](#input\_vnet\_route\_all\_enabled) | Should all outbound traffic have NAT gateways, network security groups and user-defined routes applied? | `bool` | `false` | no |
+| <a name="input_windows_sku_name"></a> [windows\_sku\_name](#input\_windows\_sku\_name) | SKU name for Windows service plans | `string` | `null` | no |
+| <a name="input_windows_worker_count"></a> [windows\_worker\_count](#input\_windows\_worker\_count) | Number of linux worker count | `number` | `1` | no |
+| <a name="input_worker_count"></a> [worker\_count](#input\_worker\_count) | The number of Workers (instances) to be allocated. | `number` | `null` | no |
+| <a name="input_zone_balancing_enabled"></a> [zone\_balancing\_enabled](#input\_zone\_balancing\_enabled) | n/a | `bool` | `false` | no |
 
-### Outputs
+## Outputs
 
 | Name | Description |
 |------|-------------|
-| label_order | Label order, e.g. `name`,`application`,`centralus`. |
-
+| <a name="output_function_app_id"></a> [function\_app\_id](#output\_function\_app\_id) | n/a |
+| <a name="output_function_app_name"></a> [function\_app\_name](#output\_function\_app\_name) | n/a |
+| <a name="output_identity"></a> [identity](#output\_identity) | n/a |
 
 
 <!-- 
